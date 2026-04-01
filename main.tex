@@ -10,6 +10,19 @@
 \usepackage{xspace}
 \usepackage{float}
 \usepackage[left=1cm,right=1cm,top=1cm,bottom=2cm,bindingoffset=0cm]{geometry}
+\usepackage{breakurl}
+
+\hypersetup{
+  breaklinks=true,
+  hidelinks = true,
+  pdftitle = {A Multi-head-based architecture for effective morphological tagging in Russian with open dictionary},
+  pdfauthor = {Skibin K., Suschenko S., Pozhidaev M.},
+  pdfkeywords = {Morphological tagging, Multi-head attention, Transformer, Embedding, Positional encoding},
+  pdfcreator = {},
+  pdfproducer = {}
+}
+
+
 
 \newcommand {\titlefont} {\Large \bf \sffamily}
 \newcommand {\authorfont} {\large \sffamily}
@@ -34,8 +47,8 @@
   \vspace{0.5cm}
 
   {\publisherfont
-    Tomsk State University\\
-    Submitted to~        AINL-2026\\
+    National Research Tomsk State University\\
+    Submitted to~\href{https://ainlconf.ru/2026/}{AINL-2026}\\
       }
 
   \end{center}
@@ -370,7 +383,7 @@ These include:
 
 The proposed architecture was implemented as a~PyTorch-based  library developed in~Python language. 
 To~reproduce the results,
-the library source code is open and publicly available at~\href{https://github.com/Sceptic101-tech/morph\_tagger.git}{github.com/Sceptic101-tech/morph\_tagger.git}.
+the library source code is open and publicly available at~\href{https://github.com/Sceptic101-tech/morph\_tagger.git}{github.com{\slash}Sceptic101-tech{\slash}morph\_tagger.git}.
 Training and testing was carried out on nVidia RTX~4090 graphics accelerator.
 The~AdamW optimizer is used with $\lambda = 1e-5$.
 The~batch size is equal to 96.
