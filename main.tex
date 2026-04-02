@@ -40,7 +40,7 @@
 
   {\authorfont
     Skibin~K.,
-    SuschenkoS.,
+    Suschenko~S., % Добавлен пробел перед инициалом 
     \href{https://marigostra.com}{Pozhidaev~M}.
   }
 
@@ -107,7 +107,7 @@ which can be divided into three stages.
 The following three stages are the~approaches based on statistical methods or neural networks.
 The~approaches based on analytical grammars or any other formal structures, including dictionaries, are not considered there due to their extremely limited capabilities and narrow scope of application.
 
-At the first stage, general statistical methods were used, including hidden Markov models (HMM, Rabiner, 1986 \cite{Rabiner} ) .
+At the first stage, general statistical methods were used, including hidden Markov models (HMM, Rabiner, 1986 \cite{Rabiner} ). % Убран пробел перед точкой
 In some of them, the tokens of the source text were declared observable states,
 and the corresponding grammatical attributes were hidden states.
 After that, it's  necessary to use the Viterbi algorithm (Viterbi, 1967 \cite{Viterbi}) to determine the most likely sequence of hidden states based on statistical data obtained from the analysis of marked-up text bodies for the Russian language.
@@ -383,7 +383,7 @@ These include:
 
 The proposed architecture was implemented as a~PyTorch-based  library developed in~Python language. 
 To~reproduce the results,
-the library source code is open and publicly available at~\href{https://github.com/Sceptic101-tech/morph\_tagger.git}{github.com{\slash}Sceptic101-tech{\slash}morph\_tagger.git}.
+the library source code is open and publicly available at~\href{https://github.com/kdskibin/morph\_tagger.git}{github.com{\slash}kdskibin{\slash}morph\_tagger.git}. % Изменен адрес репозиторя (поменялся username)
 Training and testing was carried out on nVidia RTX~4090 graphics accelerator.
 The~AdamW optimizer is used with $\lambda = 1e-5$.
 The~batch size is equal to 96.
@@ -506,7 +506,9 @@ Areas of further research include testing the architecture for solving the probl
 where the sequence being analyzed is not a~fully written word, but an abbreviated entry
 that requires more attention on~context rather than on~internal structure analysis.
 
+\newpage % Переход на новую строку для отделения заключения от спсика литературы
 \begin{thebibliography}{10}
+\onecolumn % Представление списка литературы в одном столбце
 
 \bibitem{transformer}
   Vaswani, A., Shazeer, N, Parmar, N, et al. (2017). Attention is All you Need. Neural Information Processing Systems. Long Beach, CA, USA.  https://doi.org{\slash}10.48550{\slash}arXiv.1706.03762
