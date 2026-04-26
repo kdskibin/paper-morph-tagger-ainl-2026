@@ -457,6 +457,10 @@ and, in~common sense, it is impossible to~clearly state that one of~these archit
 but the~proposed architecture requires only 48M of~weight parameters what is clealy less than their number in~BERT which is usually equal to~400M and higher.
 In~addition, the~whole collection of~training data can be processed on~one consumer-level graphical accelerator and requires approximately 8--12 hours,
 what opens new research potential for~institutions without professional-level hardware.
+
+It is also worth considering that BERT requires two-stage pre-training on massive unlabeled data corpora and subsequent fine-tuning for the task of morphological tagging.
+Although the fine-tuning stage can be performed on consumer-level hardware, training the model from scratch is challenging, if not impossible, without an advanced GPU.
+This limitation reduces the flexibility and scope of experiments that can be conducted quickly.
 Using the~proposed architecture makes no~dependence on~training collection used for~BERT training.
 
 The~prediction of~all~categories for~all~words in~a~sentence is also highly dependent of~the~list of~categories being process.
