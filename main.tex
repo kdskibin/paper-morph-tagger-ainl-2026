@@ -129,8 +129,7 @@ what makes parallel data processing difficult and prevents the effective use of 
 \end{itemize}
 
 The third stage, which is the most sophisticated, includes various attempts to apply various forms of the transformer architecture.
-In~particular, the BERT model.
-This is a class of the most advanced algorithms that show the state of the art level of quality, but at the same time, it often remains extremely resource-consumptive both in the sense of computing resources and in the sense of available training data.
+In~particular, the BERT model. This is a class of the most advanced algorithms that show the state of the art level of quality, but at the same time, it often remains extremely resource-consumptive both in the sense of computing resources and in the sense of available training data. %
 
 In this category of models, the morphological tagging tool based on the BERT model, proposed by the MIPT DeepPavlov laboratory \cite{dp}, should be noted.
 Our research shows that the use of the BERT model itself  has a~
@@ -155,12 +154,12 @@ In this case, we would get an architecture with a closed dictionary,
 which we consider to be a~significant drawback,
 which can be observed, for~example, in~the Word2vec architecture (Mikolov, 2013 \cite{word2vec}).
 
-Having accepted the inadmissibility of the formation of tokens on ~word boundaries,
+Having accepted the inadmissibility of the formation of tokens on word boundaries, %
 two approaches were considered instead:
 Byte-pair Encoding (BPE) (Kozma, 2024 \cite{bpe}) and $n$-grams like in the Fasttext architecture (Bojanowski, 2016 \cite{fasttext}).
-Both of these options allow for text analysis with ~open dictionary support.
+Both of these options allow for text analysis with open dictionary support. %
 
-BPE is a data compression algorithm that is based on the idea of sequentially replacing the most common byte pairs with a new, previously unused byte. 
+BPE is a data compression algorithm that is based on the idea of sequentially replacing the most common byte pairs with a new, previously unused byte.
 BPE starts by analyzing the frequency of occurrence of all possible byte pairs in the original dataset and then iteratively replaces the most frequently occurring pairs with a new character. 
 The process continues until a specified stopping criterion is reached, for example, a certain dictionary size or data compression ratio.
 
@@ -177,7 +176,7 @@ seven morphological classifier models with different parameters of the threshold
 Since the minimum frequency of tokens appearing together to combine them is a relative value and depends on the training data,
 we will provide values for the dataset used for training and testing the model.
 Seven values of the threshold frequency of merging were selected for testing.: 500, 600, 800, 1000, 1200, 1400, 2000.
-As~a result, they all showed approximately the same results.
+As~a result, they all showed approximately the same results, despite the fact that the size of the dictionary varied by more than two times in edge cases.
 The~discrepancy of accuracy in predicting all grammatical attributes of a word and accuracy in predicting the entire sentence is no more than 1\%.
 There was no strict linear relationship between the quality and the value of the minimum frequency of fusion.
 
@@ -191,11 +190,11 @@ the~best behavior of the model is achieved with ~a dictionary length of 2198 tok
 The $n$-gram tokenizer from the FastText model is an algorithm for splitting text into tokens
 using a pre-trained vector representation model of words. 
 $n$-grams are all possible substrings of a certain length $n$ extracted from a word. 
-This approach is considered as an additional option for the development of our architecture  for~further research.
+This approach is considered as an additional option for the development of our architecture for~further research.
 
 \begin{figure*}[tb]
     \centering
-\includegraphics[width=0.9\textwidth,keepaspectratio]{arch.pdf}
+\includegraphics[width=0.9\textwidth,keepaspectratio]{processing_pipeline.png}
     \caption{Data processing pipeline}
     \label{arch_fig}\vspace{-.3cm}
 \end{figure*}
@@ -211,7 +210,7 @@ The representation of a word by several tokens led to~two features in~the implem
 \begin{enumerate}
 \item{
 It is required to limit the length of each word in ~tokens to a certain fixed value.
-A length value of six corresponds to a quantile of 0.98 in ~a fraction of words.
+A length value of six corresponds to a quantile of 0.98 in a fraction of words.
 It was selected, and all words with a length of more than six tokens were cut off.
 }
 \item{
@@ -222,7 +221,7 @@ It was selected, and all words with a length of more than six tokens were cut of
 
 Since we are solving the task of classifying the attributes of words, when the model is trained, each word is assigned the correct value of the grammatical attribute,
 which is compared with the one obtained by the model during the forward pass.
-The multiplicity of tokens for ~word representation requires us, in addition to the approach proposed above, to consider the~alternative approaches:
+The multiplicity of tokens for word representation requires us, in addition to the approach proposed above, to consider the~alternative approaches:
 
 \begin{enumerate}
 \item{
@@ -237,7 +236,7 @@ These two approaches were not considered, since the first would obviously lead t
 
 \subsection{Basic Encoding of segments}
 
-At ~each step, the architecture performs processing  of the four-dimensional tensor:
+At each step, the architecture performs processing of the four-dimensional tensor:
 
 \begin{itemize}
 \item{
@@ -247,7 +246,7 @@ a~set of segments for~one batch
 words in each segment
 }
 \item{
-tokens in ~each word
+tokens in each word
 }
 \item{
 vector representation of each token in the~form of~an~embedding
@@ -261,11 +260,10 @@ The general calculation procedure can be described as follows:
 The positional encoding (RoPE) is applied to each token inside each word.
 }
 \item{
-The dot product attention is calculated inside each word for ~tokens included in~this word.
-Thus, if there are $n$ words in the ~segment, then dot product attention is calculated $n$ times.
+The dot product attention is calculated inside each word for tokens included in~this word.
 }
 \item{
-Calculation of the score of the token (contribution of the token to the overall representation of the word). To do this, the results of the previous step are processed using a fully connected network with subsequent processing by the softmax() function.
+Calculation of the score of the token (contribution of the token to the overall representation of the word). To do this, the results of the previous step are processed using a fully connected network with subsequent processing by the \textit{softmax} function.
 }
 \item{
 The vectors of token representation within a single word are aggregated into a common vector of word representation by summation with multiplication by the coefficient obtained at the previous step.
@@ -381,9 +379,9 @@ These include:
 
 \subsection{Experiment Setup}
 
-The proposed architecture was implemented as a~PyTorch-based  library developed in~Python language. 
+The proposed architecture was implemented as a~PyTorch-based library developed in~Python language. 
 To~reproduce the results,
-the library source code is open and publicly available at~\href{https://github.com/kdskibin/morph\_tagger.git}{github.com{\slash}kdskibin{\slash}morph\_tagger.git}. % Изменен адрес репозиторя (поменялся username)
+the library source code is open and publicly available at~\href{https://github.com/kdskibin/morph\_tagger.git}{github.com{\slash}kdskibin{\slash}morph\_tagger.git}.
 Training and testing was carried out on nVidia RTX~4090 graphics accelerator.
 The~AdamW optimizer is used with $\lambda = 1e-5$.
 The~batch size is equal to 96.
@@ -396,7 +394,7 @@ The training process includes 35 epochs with a change in the learning rate in th
 \end{itemize}
 
 The~training process takes approximately 8--12 hours depending on~the~accelerator model.
-The~resulting model has the~size of 195MB and has  48792985 weight parameters.
+The~resulting model has the~size of 195MB and has 48792985 weight parameters.
 
 \section{Results}
 
@@ -447,28 +445,28 @@ For~the~case of~predicting all~categories of~a~word the~proposed architecture sh
 The~following categories were taken into account: upos, Mood, VerbForm, Person, Animacy, Degree, Variant, Number, Gender, NumForm, Case, Tense, Voice.
 For~the~same set of~categories the~GRU-based architecture (Movsesyan, 2022 \cite{gru}) provides accuracy 93.88\%.
 The~BERT-based approach shows the~accuracy of~predicting all~categories equal to~97.6\%.
-Though  it~is clearly better than obtained by~proposed architecture, we are unable to~be sure that this results can be comparable,
+Though it~is clearly better than obtained by~proposed architecture, we are unable to~be sure that this results can be comparable,
 because the~authors do~not give the~exact list of~the~categories being analyzed.
 Using different sets of~categories gives different results:
 for~example, the~set of categories we mentioned previously (upos, Mood, VerbForm, Person, Animacy, Degree, Variant, Number, Gender, NumForm, Case, Tense, Voice) isn't their full list which can be~found in~the~dataset.
-If we test the~full list of~categories, the~accuracy plummets  to~84.861\%.
+If we test the~full list of~categories, the~accuracy plummets to~84.861\%.
 So this number is~highly dependent on~the~exact list of~categories being tested.
 
 We must admit that in~some situations the~BERT-based architecture by~DeepPavlov can outperforme the~proposed one
-and, in~common sense, it is impossible to~clearly state that one of~these architectures is absolutely better than another (though the~difference, very likely, will be  not significant),
-but the~proposed architecture requires only 48M of~weight parameters what is clealy less than their number in~BERT  which is  usually equal to~400M and higher.
+and, in~common sense, it is impossible to~clearly state that one of~these architectures is absolutely better than another (though the~difference, very likely, will be not significant),
+but the~proposed architecture requires only 48M of~weight parameters what is clealy less than their number in~BERT which is usually equal to~400M and higher.
 In~addition, the~whole collection of~training data can be processed on~one consumer-level graphical accelerator and requires approximately 8--12 hours,
 what opens new research potential for~institutions without professional-level hardware.
 Using the~proposed architecture makes no~dependence on~training collection used for~BERT training.
 
-The~prediction of~all~categories for~all~words in~a~sentence is also highly dependent  of~the~list of~categories being process.
+The~prediction of~all~categories for~all~words in~a~sentence is also highly dependent of~the~list of~categories being process.
 If we take into account absolutely all categories in the~dataset, the~result shows that approximately every fifth sentence (22\%) can be identified fully correctly,
 but we still unaware could this result be compared with other results due to unclear list of~categories.
 
 
 \section*{Conclusion}
 
-An~architecture for~~morphological tagging for~the Russian language based on~the~Multi-head attention,
+An~architecture for~morphological tagging for~the Russian language based on~the~Multi-head attention,
 has been proposed and tested.
 It has the~following characteristics: 
 
@@ -496,7 +494,7 @@ Does not~require pre-training on~large unlabeled collections of~text with the us
 Capable of learning and operating on~consumer-level graphics accelerators
 }
 \item{
-Shows an increase in processing speed compared to ~other architectures
+Shows an increase in processing speed compared to~other architectures
 }
 \end{itemize}
 
